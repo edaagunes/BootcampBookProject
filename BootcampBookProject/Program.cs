@@ -1,5 +1,6 @@
 using BootcampBookProject.DataAccessLayer.Context;
 using BootcampBookProject.BusinessLayer.Container;
+using FluentValidation.AspNetCore;
 using BootcampBookProject.EntityLayer.Entities;
 using BootcampBookProject.Models;
 
@@ -7,8 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<BookContext>();
 
+builder.Services.AddControllersWithViews().AddFluentValidation();
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
+
 
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BookContext>().AddErrorDescriber<CustomIdentityValidator>();
 

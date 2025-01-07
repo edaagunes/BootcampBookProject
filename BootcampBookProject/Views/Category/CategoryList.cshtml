@@ -1,0 +1,62 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "CategoryList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6>Kitap Kategorileri</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center justify-content-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategorİ</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Durum</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0" style="margin-left:17px;">@count</p>
+                                    </td>
+                                    <td>                                      
+                                        <div class="d-flex px-2" style="margin-left:10px;">                                          
+                                           
+                                                <h6 class="mb-0 text-sm">@item.CategoryName</h6>
+                                           
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">@(item.Status == true ? "Aktif" : "Pasif")</p>
+                                    </td>
+
+                                    <td>
+                                        <a class="btn btn-outline-danger btn-sm" href="/Category/DeleteCategory/@item.CategoryId">Sİl</a>
+                                        <a class="btn btn-outline-success btn-sm" href="/Category/UpdateCategory/@item.CategoryId">Güncelle</a>
+                                    </td>
+                                </tr>
+                            }
+                         
+                        </tbody>
+                        
+                    </table>
+                    <a href="/Category/CreateCategory" class="btn btn-outline-primary btn-sm" style="margin-left:10px;">YENİ KATEGORİ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

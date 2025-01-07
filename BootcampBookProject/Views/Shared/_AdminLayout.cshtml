@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("_HeadLayout")
+
+<body class="g-sidenav-show  bg-gray-100">
+    
+    @await Component.InvokeAsync("_SidebarLayout")
+
+    <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+
+        @await Component.InvokeAsync("_NavbarLayout")
+
+        <div class="container-fluid py-4">
+
+           @RenderBody()
+       
+        </div>
+       
+    </main>
+
+    @await Component.InvokeAsync("_ScriptLayout")
+</body>
+@* @await Component.InvokeAsync("_FooterLayout") *@
+</html>

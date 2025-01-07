@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BootcampBookProject.BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BootcampBookProject.Controllers
 {
 	public class BookController : Controller
 	{
-		public IActionResult Index()
+		private readonly IBookService _bookService;
+
+		public BookController(IBookService bookService)
 		{
-			return View();
+			_bookService = bookService;
+		}
+
+		public IActionResult BookList()
+		{
+			ViewBag.PageTitle = "Kitaplar";
+
+			var values = _bookService.TGetAll();
+			return View(values);
 		}
 	}
 }
