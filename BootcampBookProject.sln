@@ -5,6 +5,12 @@ VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootcampBookProject", "BootcampBookProject\BootcampBookProject.csproj", "{CF1A0D97-7EFC-4305-925B-A3FC4DFE4A20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootcampBookProject.EntityLayer", "BootcampBookProject.EntityLayer\BootcampBookProject.EntityLayer.csproj", "{92EC34BC-763F-4E2B-B93E-11CF23485BCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootcampBookProject.DataAccessLayer", "BootcampBookProject.DataAccessLayer\BootcampBookProject.DataAccessLayer.csproj", "{94C1F792-1617-40EE-9AD8-C39DDBA13769}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootcampBookProject.BusinessLayer", "BootcampBookProject.BusinessLayer\BootcampBookProject.BusinessLayer.csproj", "{877B5537-DAA8-42FA-8C7D-4AFC9EBAD29D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{CF1A0D97-7EFC-4305-925B-A3FC4DFE4A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF1A0D97-7EFC-4305-925B-A3FC4DFE4A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF1A0D97-7EFC-4305-925B-A3FC4DFE4A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92EC34BC-763F-4E2B-B93E-11CF23485BCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92EC34BC-763F-4E2B-B93E-11CF23485BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92EC34BC-763F-4E2B-B93E-11CF23485BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92EC34BC-763F-4E2B-B93E-11CF23485BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94C1F792-1617-40EE-9AD8-C39DDBA13769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94C1F792-1617-40EE-9AD8-C39DDBA13769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94C1F792-1617-40EE-9AD8-C39DDBA13769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94C1F792-1617-40EE-9AD8-C39DDBA13769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{877B5537-DAA8-42FA-8C7D-4AFC9EBAD29D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{877B5537-DAA8-42FA-8C7D-4AFC9EBAD29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{877B5537-DAA8-42FA-8C7D-4AFC9EBAD29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{877B5537-DAA8-42FA-8C7D-4AFC9EBAD29D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

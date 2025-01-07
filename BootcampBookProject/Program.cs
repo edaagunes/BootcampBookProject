@@ -1,7 +1,18 @@
+using BootcampBookProject.DataAccessLayer.Context;
+using BootcampBookProject.BusinessLayer.Container;
+using BootcampBookProject.EntityLayer.Entities;
+using BootcampBookProject.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<BookContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BookContext>().AddErrorDescriber<CustomIdentityValidator>();
+
+builder.Services.ContainerDependencies();
 
 var app = builder.Build();
 
@@ -18,6 +29,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
