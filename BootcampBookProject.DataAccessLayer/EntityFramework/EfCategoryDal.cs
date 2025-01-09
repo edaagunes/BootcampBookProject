@@ -15,5 +15,11 @@ namespace BootcampBookProject.DataAccessLayer.EntityFramework
 		public EfCategoryDal(BookContext bookContext) : base(bookContext)
 		{
 		}
+
+		public List<Category> GetCategoriesByStatusTrue()
+		{
+			using var context= new BookContext();
+			return context.Categories.Where(x=>x.Status==true).ToList();
+		}
 	}
 }

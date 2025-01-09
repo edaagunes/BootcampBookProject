@@ -41,7 +41,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">@(item.Status == true ? "Aktif" : "Pasif")</p>
+                                        <span class="badge badge-sm @(item.Status ? "bg-gradient-primary" : "bg-gradient-dark")">
+                                            @(item.Status ? "AKTİF" : "PASİF")
+                                        </span>
                                     </td>
 
                                     <td>

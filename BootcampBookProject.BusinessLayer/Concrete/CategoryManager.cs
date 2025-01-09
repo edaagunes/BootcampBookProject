@@ -33,6 +33,11 @@ namespace BootcampBookProject.BusinessLayer.Concrete
 			return _categoryDal.GetById(id);
 		}
 
+		public List<Category> TGetCategoriesByStatusTrue()
+		{
+			return _categoryDal.GetCategoriesByStatusTrue();
+		}
+
 		public void TInsert(Category entity)
 		{
 			_categoryDal.Insert(entity);

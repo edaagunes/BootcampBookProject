@@ -53,7 +53,7 @@ namespace BootcampBookProject.Controllers
 		{
 			ViewBag.PageTitle = "Kitap Ekle";
 
-			var values = _categoryService.TGetAll();
+			var values = _categoryService.TGetCategoriesByStatusTrue();
 
 			List<SelectListItem> values2 = (from x in values
 											select new SelectListItem
@@ -74,7 +74,7 @@ namespace BootcampBookProject.Controllers
 
 			ViewBag.PageTitle = "Kitap Ekle";
 
-			var categoryList = _categoryService.TGetAll();
+			var categoryList = _categoryService.TGetCategoriesByStatusTrue();
 			ViewBag.categories = categoryList.Select(x => new SelectListItem
 			{
 				Text = x.CategoryName,
@@ -129,7 +129,7 @@ namespace BootcampBookProject.Controllers
 
 			var book=_bookService.TGetById(id);
 
-			var values = _categoryService.TGetAll();
+			var values = _categoryService.TGetCategoriesByStatusTrue();
 
 			List<SelectListItem> values2 = (from x in values
 											select new SelectListItem
@@ -149,7 +149,7 @@ namespace BootcampBookProject.Controllers
 
 			ViewBag.PageTitle = "Kitap Güncelle";
 
-			var categoryList = _categoryService.TGetAll();
+			var categoryList = _categoryService.TGetCategoriesByStatusTrue();
 			ViewBag.categories = categoryList.Select(x => new SelectListItem
 			{
 				Text = x.CategoryName,
