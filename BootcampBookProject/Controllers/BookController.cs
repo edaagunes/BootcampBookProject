@@ -147,7 +147,20 @@ namespace BootcampBookProject.Controllers
 		[HttpPost]
 		public async Task<IActionResult> UpdateBook(Book book, IFormFile file)
 		{
+			ViewBag.PageTitle = "Kitap Güncelle";
+
 			ModelState.Clear();
+
+			var values = _categoryService.TGetCategoriesByStatusTrue();
+
+			List<SelectListItem> values2 = (from x in values
+											select new SelectListItem
+											{
+												Text = x.CategoryName,
+												Value = x.CategoryId.ToString()
+											}).ToList();
+
+			ViewBag.categories = values2;
 
 			// Mevcut kitap verisini veritabanından alın
 			var existingBook = _bookService.TGetById(book.BookId);
