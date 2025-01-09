@@ -28,6 +28,11 @@ namespace BootcampBookProject.BusinessLayer.Concrete
 			return _bookDal.GetAll();
 		}
 
+		public List<Book> TGetAllBooksWithCategory()
+		{
+			return _bookDal.GetAllBooksWithCategory();
+		}
+
 		public Book TGetById(int id)
 		{
 			return _bookDal.GetById(id);

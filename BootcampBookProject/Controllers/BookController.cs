@@ -1,5 +1,6 @@
 ﻿using BootcampBookProject.BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList.Extensions;
 
 namespace BootcampBookProject.Controllers
 {
@@ -12,12 +13,14 @@ namespace BootcampBookProject.Controllers
 			_bookService = bookService;
 		}
 
-		public IActionResult BookList()
+		public IActionResult BookList(int page=1,int pageSize=5)
 		{
 			ViewBag.PageTitle = "Kitaplar";
 
-			var values = _bookService.TGetAll();
-			return View(values);
+			var values = _bookService.TGetAllBooksWithCategory();
+			var pagedBooks = values.ToPagedList(page, pageSize);
+
+			return View(pagedBooks);
 		}
 	}
 }
