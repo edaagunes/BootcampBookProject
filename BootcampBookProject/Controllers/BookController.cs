@@ -5,6 +5,7 @@ using BootcampBookProject.EntityLayer.Entities;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using X.PagedList.Extensions;
 
@@ -21,12 +22,23 @@ namespace BootcampBookProject.Controllers
 			_categoryService = categoryService;
 		}
 
-		public IActionResult BookList(int page=1,int pageSize=5)
+		public IActionResult BookList(string searchQuery,int page=1,int pageSize=5)
 		{
 			ViewBag.PageTitle = "Kitaplar";
 
-			var values = _bookService.TGetAllBooksWithCategory();
-			var pagedBooks = values.ToPagedList(page, pageSize);
+			var books = _bookService.TGetAllBooksWithCategory();
+
+			if (!string.IsNullOrEmpty(searchQuery))
+			{
+				searchQuery = searchQuery.ToLower();
+				books = books.Where(b => b.Name.ToLower().Contains(searchQuery) ||
+									b.Author.ToLower().Contains(searchQuery) || 
+									b.Description.ToLower().Contains(searchQuery) ||
+									b.Category.CategoryName.ToLower().Contains(searchQuery)
+									).ToList();
+			}
+
+			var pagedBooks = books.ToPagedList(page, pageSize);
 
 			return View(pagedBooks);
 		}
@@ -193,5 +205,7 @@ namespace BootcampBookProject.Controllers
 			_bookService.TChangeStatusTrue(id);
 			return RedirectToAction("BookList");
 		}
+	
+		
 	}
 }
