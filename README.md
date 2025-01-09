@@ -18,7 +18,7 @@ Kitaplar listelenir. Ekleme, güncelleme ve silme işlemleri yapılır.
 
 * ☑️  Kitap durumları Aktif/Pasif olarak buton aracılığıyla güncellenir.
 
-* 🖼️ Kitap görselleri modal ile büyük görüntülenir.
+* 🖼️ Kitabın görseli, modal içinde büyük olarak görüntülenebilir.
 
 * 🔍 Kitap listesinde arama yapılabilir.
 
