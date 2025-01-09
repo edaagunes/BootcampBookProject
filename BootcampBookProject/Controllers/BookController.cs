@@ -3,6 +3,7 @@ using BootcampBookProject.BusinessLayer.ValidationRules.BookValidator;
 using BootcampBookProject.BusinessLayer.ValidationRules.CategoryValidator;
 using BootcampBookProject.EntityLayer.Entities;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using X.PagedList.Extensions;
 
 namespace BootcampBookProject.Controllers
 {
+	[Authorize]
 	public class BookController : Controller
 	{
 		private readonly IBookService _bookService;
@@ -141,21 +143,20 @@ namespace BootcampBookProject.Controllers
 			ViewBag.categories = values2;
 			return View(book);
 		}
-		
+
 		[HttpPost]
 		public async Task<IActionResult> UpdateBook(Book book, IFormFile file)
 		{
 			ModelState.Clear();
 
-			ViewBag.PageTitle = "Kitap Güncelle";
-
-			var categoryList = _categoryService.TGetCategoriesByStatusTrue();
-			ViewBag.categories = categoryList.Select(x => new SelectListItem
+			// Mevcut kitap verisini veritabanından alın
+			var existingBook = _bookService.TGetById(book.BookId);
+			if (existingBook == null)
 			{
-				Text = x.CategoryName,
-				Value = x.CategoryId.ToString()
-			}).ToList();
+				return NotFound();
+			}
 
+			// Görsel güncelleme işlemi
 			if (file != null && file.Length > 0)
 			{
 				var resource = Directory.GetCurrentDirectory();
@@ -167,21 +168,22 @@ namespace BootcampBookProject.Controllers
 				{
 					await file.CopyToAsync(stream);
 				}
-				book.ImageUrl = "/images/" + imageName;
+				existingBook.ImageUrl = "/images/" + imageName;
 			}
 
-			else
-			{
-				book.ImageUrl = book.ImageUrl;
-			}
+			// Diğer alanları güncelle
+			existingBook.Name = book.Name;
+			existingBook.Author = book.Author;
+			existingBook.Description = book.Description;
+			existingBook.CategoryId = book.CategoryId;
 
+			// FluentValidation ile doğrulama
 			CreateBookValidator validationRules = new CreateBookValidator();
-			ValidationResult result = validationRules.Validate(book);
+			ValidationResult result = validationRules.Validate(existingBook);
 
 			if (result.IsValid)
 			{
-				book.Status = true;
-				_bookService.TUpdate(book);
+				_bookService.TUpdate(existingBook);
 				return RedirectToAction("BookList");
 			}
 			else
@@ -193,7 +195,8 @@ namespace BootcampBookProject.Controllers
 			}
 			return View(book);
 		}
-	
+
+
 		public IActionResult ChangeStatusFalse(int id)
 		{
 			_bookService.TChangeStatusFalse(id);

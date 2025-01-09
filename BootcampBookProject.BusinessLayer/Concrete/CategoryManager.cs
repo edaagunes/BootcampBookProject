@@ -18,6 +18,11 @@ namespace BootcampBookProject.BusinessLayer.Concrete
 			_categoryDal = categoryDal;
 		}
 
+		public List<Book> TGetCategoryWithBooks(int id)
+		{
+			return _categoryDal.GetCategoryWithBooks(id);
+		}
+
 		public void TDelete(int id)
 		{
 			_categoryDal.Delete(id);

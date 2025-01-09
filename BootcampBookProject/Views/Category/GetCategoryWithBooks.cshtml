@@ -1,0 +1,36 @@
+﻿@model List<Book>
+@{
+	ViewData["Title"] = "GetCategoryWithBooks";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>@ViewBag.categoryName</h4>
+
+<div class="container mt-5">
+	<div class="row">
+
+		@if (!Model.Any())
+		{
+			<h6>Bu kategoriye ait kitap bulunmamaktadır 😢</h6>
+		}
+
+			@foreach (var item in Model)
+			{
+				<div class="col-md-4 mb-4">
+					<div class="card shadow-sm border-light">
+						<img src="@item.ImageUrl" class="card-img-top" alt="Book Image" style="height: 200px; object-fit: cover;">
+
+						<div class="card-body">
+							<h5 class="card-title">@item.Name</h5>
+							<p class="card-text text-muted"> @item.Author</p>
+						</div>
+						<div class="card-footer text-center">
+							<a href="@Url.Action("UpdateBook", "Book", new { id = item.BookId })" class="btn btn-primary btn-sm">Detaylar</a>
+						</div>
+					</div>
+				</div>
+			}
+		
+	</div>
+</div>
+

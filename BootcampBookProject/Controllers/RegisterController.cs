@@ -1,10 +1,12 @@
 ﻿using BootcampBookProject.EntityLayer.Entities;
 using BootcampBookProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BootcampBookProject.Controllers
 {
+	[AllowAnonymous]
 	public class RegisterController : Controller
 	{
 		private readonly UserManager<AppUser> _userManager;

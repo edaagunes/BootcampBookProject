@@ -2,10 +2,12 @@
 using BootcampBookProject.BusinessLayer.ValidationRules.CategoryValidator;
 using BootcampBookProject.EntityLayer.Entities;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BootcampBookProject.Controllers
 {
+	[Authorize]
 	public class CategoryController : Controller
 	{
 		private readonly ICategoryService _categoryService;
@@ -93,6 +95,15 @@ namespace BootcampBookProject.Controllers
 				}
 			}
 			return View(category);
+		}
+	
+		public IActionResult GetCategoryWithBooks(int id)
+		{
+			ViewBag.PageTitle = "Kategorinin Kitapları";
+			ViewBag.categoryName=_categoryService.TGetCategoryWithBooks(id).Select(x=>x.Category.CategoryName).FirstOrDefault();
+
+			var values=_categoryService.TGetCategoryWithBooks(id);
+			return View(values);
 		}
 	}
 }

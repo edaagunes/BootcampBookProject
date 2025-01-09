@@ -10,5 +10,6 @@ namespace BootcampBookProject.DataAccessLayer.Abstract
 	public interface ICategoryDal : IGenericDal<Category>
 	{
 		List<Category> GetCategoriesByStatusTrue();
+		List<Book> GetCategoryWithBooks(int id);
 	}
 }

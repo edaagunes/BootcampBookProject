@@ -10,5 +10,6 @@ namespace BootcampBookProject.BusinessLayer.Abstract
 	public interface ICategoryService : IGenericService<Category>
 	{
 		List<Category> TGetCategoriesByStatusTrue();
+		List<Book> TGetCategoryWithBooks(int id);
 	}
 }

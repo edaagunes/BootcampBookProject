@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
         <label>Kitap Açıklaması</label>
-        <input type="text" asp-for="Description" class="form-control" />
+        <textarea type="text" rows="2" asp-for="Description" class="form-control"></textarea>
         <br />
         <span class="text-primary" asp-validation-for="Description"></span>
     </div>
@@ -32,18 +32,20 @@
     </div>
     <div class="form-group">
         <label>Kitap Görseli</label>
-        <input type="file" name="file" asp-for="ImageUrl" class="form-control" />
-        <br />
+        <input type="file" name="file" class="form-control" />
+        <small class="text-muted">Yeni bir görsel seçilmezse mevcut görsel kullanılacaktır.</small>
         <span class="text-primary" asp-validation-for="ImageUrl"></span>
 
         @if (Model.ImageUrl != null)
         {
-            <div>
+            <div class="mt-3">
                 <label>Mevcut Görsel:</label>
-                <img src="@Model.ImageUrl" alt="Kitap Görseli" width="80" height="80" border-radius="10" />
+                <img src="@Model.ImageUrl" alt="Kitap Görseli" style="width: 80px; height: 80px; border-radius: 10px;" />
             </div>
         }
     </div>
+
+
     <button type="submit" class="btn btn-outline-success btn-sm">Güncelle</button>
 </form>
 

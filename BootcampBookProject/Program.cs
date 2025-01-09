@@ -10,13 +10,23 @@ builder.Services.AddDbContext<BookContext>();
 
 builder.Services.AddControllersWithViews().AddFluentValidation();
 
-// Add services to the container.
-
-
 
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BookContext>().AddErrorDescriber<CustomIdentityValidator>();
 
 builder.Services.ContainerDependencies();
+
+// Kimlik doðrulama ve yetkilendirme için servisleri ekleme
+builder.Services.AddAuthentication("Cookies")
+	.AddCookie(options =>
+	{
+		options.LoginPath = "/Login/Index";  // Login sayfasý
+		options.AccessDeniedPath = "/Account/AccessDenied";  // Yetkisiz eriþim sayfasý
+	});
+
+builder.Services.AddAuthorization(options =>
+{
+	options.FallbackPolicy = options.DefaultPolicy; // Varsayýlan politika
+});
 
 var app = builder.Build();
 

@@ -2,6 +2,7 @@
 using BootcampBookProject.DataAccessLayer.Context;
 using BootcampBookProject.DataAccessLayer.Repositories;
 using BootcampBookProject.EntityLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,13 @@ namespace BootcampBookProject.DataAccessLayer.EntityFramework
 		{
 			using var context= new BookContext();
 			return context.Categories.Where(x=>x.Status==true).ToList();
+		}
+
+		public List<Book> GetCategoryWithBooks(int id)
+		{
+			using var context = new BookContext();
+			var values=context.Books.Include(x=>x.Category).Where(x=>x.CategoryId==id).ToList();
+			return values;
 		}
 	}
 }

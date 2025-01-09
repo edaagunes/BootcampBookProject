@@ -1,10 +1,12 @@
 ﻿using BootcampBookProject.EntityLayer.Entities;
 using BootcampBookProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BootcampBookProject.Controllers
 {
+	[AllowAnonymous]
 	public class LoginController : Controller
 	{
 		private readonly SignInManager<AppUser> _signInManager;
@@ -30,7 +32,7 @@ namespace BootcampBookProject.Controllers
 			var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, true);
 			if (result.Succeeded)
 			{
-				return RedirectToAction("Index", "Book");
+				return RedirectToAction("BookList", "Book");
 			}
 			else
 			{
