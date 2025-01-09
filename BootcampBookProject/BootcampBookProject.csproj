@@ -44,4 +44,8 @@
     <ProjectReference Include="..\BootcampBookProject.BusinessLayer\BootcampBookProject.BusinessLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

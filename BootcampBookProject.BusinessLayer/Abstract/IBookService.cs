@@ -10,5 +10,7 @@ namespace BootcampBookProject.BusinessLayer.Abstract
 	public interface IBookService : IGenericService<Book>
 	{
 		List<Book> TGetAllBooksWithCategory();
+		void TChangeStatusFalse(int id);
+		void TChangeStatusTrue(int id);
 	}
 }

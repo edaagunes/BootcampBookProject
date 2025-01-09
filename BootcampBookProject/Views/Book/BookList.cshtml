@@ -1,118 +1,169 @@
 ﻿@using X.PagedList
 @using X.PagedList.Mvc.Core
 @model IPagedList<Book>
+
 @{
-    ViewData["Title"] = "BookList";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    int count = (Model.PageNumber - 1) * Model.PageSize;
+	ViewData["Title"] = "BookList";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	int count = (Model.PageNumber - 1) * Model.PageSize;
 }
 
 <div class="row">
-    <div class="col-12">
-        <div class="card mb-4">
-            <div class="card-header pb-0">
-                <h6>Kitaplar</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kİtap</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Yazar</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Açıklama</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Durum</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategorİ</th>
-                                <th class="text-secondary opacity-7"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                count++;
-                                <tr>
-                                    <td class="align-middle text-center mb-0 text-sm">@count</td>
-                                    <td style="max-width:250px; overflow:hidden; text-overflow:ellipsis;">
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="@item.ImageUrl" style="width:80px;height:80px; border-radius:10px;" alt="book">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">&nbsp; @item.Name</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="max-width:150px; overflow:hidden; text-overflow:ellipsis;">
-                                        <p class="text-xs font-weight-bold mb-0">@item.Author</p>
-                                    </td>
-                                    <td>                                        
-                                            <p class="text-xs font-weight-bold mb-0" style="margin-left:50px !important">@item.Description</p>
+	<div class="col-12">
+		<div class="card mb-4">
+			<div class="card-header pb-0">
+				<h6>Kitaplar</h6>
+			</div>
+			<div class="card-body px-0 pt-0 pb-2">
+				<div class="table-responsive p-0">
+					<table class="table align-items-center mb-0">
+						<thead>
+							<tr>
+								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kİtap</th>
+								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Yazar</th>
+								<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Açıklama</th>
+								<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Durum</th>
+								<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategorİ</th>
+								<th class="text-secondary opacity-7"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								count++;
+								<tr>
+									<td class="align-middle text-center mb-0 text-sm">@count</td>
+									<td style="max-width:250px; overflow:hidden; text-overflow:ellipsis;">
+										<div class="d-flex px-2 py-1">
+											<div>
+												<img src="@item.ImageUrl"
+													 style="width:80px;height:80px; border-radius:10px;" alt="book"
+													 class="thumbnail-image"
+													 data-large-image="@item.ImageUrl"> 
+											</div>
+											<div class="d-flex flex-column justify-content-center">
+												<h6 class="mb-0 text-sm">&nbsp; @item.Name</h6>
+											</div>
+										</div>
+									</td>
+									<td style="max-width:150px; overflow:hidden; text-overflow:ellipsis;">
+										<p class="text-xs font-weight-bold mb-0">@item.Author</p>
+									</td>
+									<td>
+										<p class="text-xs font-weight-bold mb-0" style="margin-left:50px !important">@item.Description</p>
+									</td>
 
-                                    </td>
+									<td class="align-middle text-center text-sm">
+										@if (item.Status)
+										{
+											<a href="/Book/ChangeStatusFalse/@item.BookId" class="text-decoration-none">
+												<span class="badge badge-sm bg-gradient-success">
+													AKTİF
+												</span>
+											</a>
+										}
+										else
+										{
+											<a href="/Book/ChangeStatusTrue/@item.BookId" class="text-decoration-none">
+												<span class="badge badge-sm bg-gradient-danger">
+													PASİF
+												</span>
+											</a>
+										}
+									</td>
 
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm @(item.Status ? "bg-gradient-success" : "bg-gradient-danger")">
-                                                @(item.Status ? "AKTİF" : "PASİF")
-                                        </span>
-                                    </td>
+									<td class="align-middle text-center">
+										<span class="text-secondary text-xs font-weight-bold">@item.Category.CategoryName</span>
+									</td>
 
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">@item.Category.CategoryName</span>
-                                    </td>
-
-                                    <td>
-                                        <a class="btn btn-outline-danger btn-sm" href="/Book/DeleteBook/@item.BookId">Sİl</a>
-                                        <a class="btn btn-outline-success btn-sm" href="/Book/UpdateBooks/@item.BookId">Güncelle</a>
-                                    </td>
-                                </tr>
-                            }                           
-                        </tbody>
-                    </table>
-                    <br />
-                    <a href="/Book/CreateBook" class="btn btn-outline-primary btn-sm" style="margin-left:10px;">YENİ KİTAP</a>
-                </div>
-            </div>
-            <div class="pagination-wrapper">
-                @Html.PagedListPager(Model, page => Url.Action("BookList", new { page }),
-                         new PagedListRenderOptions
-                {
-                    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-                    DisplayLinkToLastPage = PagedListDisplayMode.Always,
-                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
-                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
-                    MaximumPageNumbersToDisplay = 5
-                })
-            </div>
-        </div>
-
-        
-    </div>
+									<td>
+										<a class="btn btn-outline-danger btn-sm" href="/Book/DeleteBook/@item.BookId">Sİl</a>
+										<a class="btn btn-outline-success btn-sm" href="/Book/UpdateBook/@item.BookId">Güncelle</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					<br />
+					<a href="/Book/CreateBook" class="btn btn-outline-primary btn-sm" style="margin-left:10px;">YENİ KİTAP</a>
+				</div>
+			</div>
+			<div class="pagination-wrapper">
+				@Html.PagedListPager(Model, page => Url.Action("BookList", new { page }),
+									new PagedListRenderOptions
+				{
+					DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+					DisplayLinkToLastPage = PagedListDisplayMode.Always,
+					DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+					DisplayLinkToNextPage = PagedListDisplayMode.Always,
+					MaximumPageNumbersToDisplay = 5
+				})
+			</div>
+		</div>
+	</div>
 </div>
 
+<!-- Modal HTML -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imageModalLabel"></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<img id="modalImage" src="" class="img-fluid" alt="Büyütülmüş Görsel">
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Görsele tıklandığında modal içinde büyütülmüş görseli göster -->
+<script>
+	document.querySelectorAll('.thumbnail-image').forEach(item => {
+		item.addEventListener('click', function() {
+			var largeImageUrl = this.getAttribute('data-large-image');
+			var modalImage = document.getElementById('modalImage');
+			modalImage.src = largeImageUrl;  // Modal'daki görselin 'src' değerini değiştir
+			var myModal = new bootstrap.Modal(document.getElementById('imageModal'));
+			myModal.show();  // Modal'ı göster
+		});
+	});
+</script>
 
 <style>
-    .pagination-wrapper ul {
-        display: flex;
-        justify-content: center;
-        list-style: none;
-        padding: 0;
-    }
+	.modal-content {
+		max-width: 90%;
+		margin: auto;
+	}
 
-        .pagination-wrapper ul li {
-            margin: 0 5px;
-        }
+	.modal-body img {
+		width: 100%;
+		height: auto;
+	}
 
-            .pagination-wrapper ul li a {
-                padding: 5px 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                text-decoration: none;
-                color: #333;
-            }
+	.pagination-wrapper ul {
+		display: flex;
+		justify-content: center;
+		list-style: none;
+		padding: 0;
+	}
 
-                .pagination-wrapper ul li a:hover {
-                    background-color: #ce0c9f;
-                    color: #fff;
-                }
+		.pagination-wrapper ul li {
+			margin: 0 5px;
+		}
+
+			.pagination-wrapper ul li a {
+				padding: 5px 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				text-decoration: none;
+				color: #333;
+			}
+
+				.pagination-wrapper ul li a:hover {
+					background-color: #ce0c9f;
+					color: #fff;
+				}
 </style>

@@ -1,0 +1,50 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "UpdateBook";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post" asp-action="UpdateBook" enctype="multipart/form-data">
+    <input type="hidden" asp-for="BookId"/>
+    <div class="form-group">
+        <label>Kitap Adı</label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <br />
+        <span class="text-primary" asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label>Yazar Adı</label>
+        <input type="text" asp-for="Author" class="form-control" />
+        <br />
+        <span class="text-primary" asp-validation-for="Author"></span>
+    </div>
+    <div class="form-group">
+        <label>Kitap Açıklaması</label>
+        <input type="text" asp-for="Description" class="form-control" />
+        <br />
+        <span class="text-primary" asp-validation-for="Description"></span>
+    </div>
+    <div class="form-group">
+        <label>Kategori</label>
+        @Html.DropDownListFor(x => x.CategoryId, (IEnumerable<SelectListItem>)ViewBag.categories, "Kategori Seçiniz", new { @class = "form-control" })
+        <br />
+        <span class="text-primary" asp-validation-for="CategoryId"></span>
+    </div>
+    <div class="form-group">
+        <label>Kitap Görseli</label>
+        <input type="file" name="file" asp-for="ImageUrl" class="form-control" />
+        <br />
+        <span class="text-primary" asp-validation-for="ImageUrl"></span>
+
+        @if (Model.ImageUrl != null)
+        {
+            <div>
+                <label>Mevcut Görsel:</label>
+                <img src="@Model.ImageUrl" alt="Kitap Görseli" width="80" height="80" border-radius="10" />
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-outline-success btn-sm">Güncelle</button>
+</form>
+
+

@@ -10,5 +10,7 @@ namespace BootcampBookProject.DataAccessLayer.Abstract
 	public interface IBookDal : IGenericDal<Book>
 	{
 		List<Book> GetAllBooksWithCategory();
+		void ChangeStatusFalse(int id);
+		void ChangeStatusTrue(int id);
 	}
 }

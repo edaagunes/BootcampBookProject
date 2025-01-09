@@ -18,6 +18,16 @@ namespace BootcampBookProject.BusinessLayer.Concrete
 			_bookDal = bookDal;
 		}
 
+		public void TChangeStatusFalse(int id)
+		{
+			_bookDal.ChangeStatusFalse(id);
+		}
+
+		public void TChangeStatusTrue(int id)
+		{
+			_bookDal.ChangeStatusTrue(id);
+		}
+
 		public void TDelete(int id)
 		{
 			_bookDal.Delete(id);

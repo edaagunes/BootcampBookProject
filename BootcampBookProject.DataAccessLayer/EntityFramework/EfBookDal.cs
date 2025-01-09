@@ -17,6 +17,22 @@ namespace BootcampBookProject.DataAccessLayer.EntityFramework
 		{
 		}
 
+		public void ChangeStatusFalse(int id)
+		{
+			using var context = new BookContext();
+			var value=context.Books.Where(x => x.BookId == id).FirstOrDefault();
+			value.Status = false;
+			context.SaveChanges();
+		}
+
+		public void ChangeStatusTrue(int id)
+		{
+			using var context = new BookContext();
+			var value = context.Books.Where(x => x.BookId == id).FirstOrDefault();
+			value.Status = true;
+			context.SaveChanges();
+		}
+
 		public List<Book> GetAllBooksWithCategory()
 		{
 			using var context= new BookContext();
