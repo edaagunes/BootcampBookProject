@@ -16,16 +16,16 @@ builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BookCo
 builder.Services.ContainerDependencies();
 
 // Kimlik doðrulama ve yetkilendirme için servisleri ekleme
-builder.Services.AddAuthentication("Cookies")
-	.AddCookie(options =>
-	{
-		options.LoginPath = "/Login/Index";  // Login sayfasý
-		options.AccessDeniedPath = "/Account/AccessDenied";  // Yetkisiz eriþim sayfasý
-	});
+builder.Services.ConfigureApplicationCookie(opts =>
+{
+	opts.LoginPath = "/Login/Index";
+});
+
+builder.Services.AddHttpClient();
 
 builder.Services.AddAuthorization(options =>
 {
-	options.FallbackPolicy = options.DefaultPolicy; // Varsayýlan politika
+    options.FallbackPolicy = options.DefaultPolicy; // Varsayýlan politika
 });
 
 var app = builder.Build();
